@@ -1,0 +1,790 @@
+<!DOCTYPE html>
+<html>
+	<!-- start right frame -->
+	<head>
+		<title>Virginia State Information</title>
+		~[wc:commonscripts] <script type="text/javascript" src="/admin/state/usa_va/VA_script.js"></script>
+		<script type="text/javascript" src="/admin/students/state/usa_va/setercode.js"></script>
+		<link href="/images/css/screen.css" rel="stylesheet" media="screen">
+		<link href="/images/css/print.css" rel="stylesheet" media="print">
+		<script src="/scripts/jquery-1.4.2.min.js"></script>
+		<script src="/scripts/jquery-ui-1.8.1.custom.min.js"></script>
+		
+		<script type="text/javascript">
+			function setDisadvantagedField() {
+				var dis = document.getElementById('VA_Disadvantaged');
+				var disadvantaged = dis.options[dis.selectedIndex].value;
+				var primnight = jQuery("#VA_PrimNight_ResCode").val();
+				if ((primnight != "") && (disadvantaged == "")) {
+					alert("Disdvantaged field is automatically set when Nighttime Residence Code is entered.");
+					dis.options[1].selected = true;
+				}
+			}
+		</script>
+		
+	</head>
+	
+	<body data-validation="exclude"  data-validation="exclude" >
+		<form action="/admin/changesrecorded.white.html" method="POST">
+			~[wc:admin_header_frame_css] <!-- breadcrumb start -->
+			<a href="/admin/home.html" target="_top">Start Page</a> &gt; <a href="/admin/student/home.html?selectstudent=nosearch" target="_top">Student Selection</a> &gt; Student Record Collection <!-- breadcrumb end -->
+			~[wc:admin_navigation_frame_css]
+			~[wc:title_student_begin_css]Virginia Student Record Collection~[wc:title_student_end_css]
+			~[SetPostValue:repType=SRC]
+			~[x:insertfile;usa_va/VA_studenttabs.html] <!-- start of content and bounding box -->
+			<h2>General State Information</h2>
+			<div class="button-row">
+				<button type="button" class="collapseAll">Collapse All</button>
+				<button type="button" class="expandAll">Expand All</button>
+			</div>
+			<div class="box-round">
+				<h2 class="toggle expanded">Enrollment</h2>
+				<div>
+				<table border="0" cellspacing="0" cellpadding="4" width="100%">
+					
+					<tr class="headerrow">
+						<td colspan="2" class="bold">Virginia State Information - Version 2.5</td>
+					</tr>
+					
+					<tr class="~[evenoddrow]">
+						<td class="bold" title="[Students]State_ExcludeFromReporting">Exclude this student from State Reporting</td>
+						<td>
+						<input type="checkbox" name="[students]State_ExcludeFromStateReporting" value =""/>
+						</td>
+					</tr>
+					
+					<tr class="~[evenoddrow]">
+						<td class="bold" title="[Students]State_StudentNumber">State Testing Identifier (EIMS State Student Number)</td>
+						<td>
+						<input type="text" name="[students]State_StudentNumber" value="" maxlength="10" size="10">
+						</td>
+					</tr>
+					
+					<tr class="~[evenoddrow]">
+						<td title="[Students]VA_ResponsibleDistrict"><span class="bold">Responsible Division</span>
+						<br />
+						<span>Enrollment-Transfer Info Current Enrollment page</span></td>
+						<td>~([students]VA_ResponsibleDistrict)</td>
+					</tr>
+					
+					<tr class="~[evenoddrow]">
+						<td title="[Students]VA_ResponsibleSchool"><span class="bold">Responsible School</span>
+						<br />
+						<span>Enrollment-Transfer Info Current Enrollment page</span></td>
+						<td>~([students]VA_ResponsibleSchool)</td>
+					</tr>
+					
+					<tr class="~[evenoddrow]">
+						<td title="[Students]VA_ServingDistrict"><span class="bold">Serving Division</span>
+						<br />
+						<span>Enrollment-Transfer Info Current Enrollment page</span></td>
+						<td>~([students]VA_ServingDistrict)
+					</tr>
+					
+					<tr class="~[evenoddrow]">
+						<td title="[Students]VA_ServingSchool" ><span class="bold">Serving School</span>
+						<br />
+						<span>Enrollment-Transfer Info Current Enrollment page</span></td>
+						<td>~([students]VA_ServingSchool)</td>
+						<input type="hidden" id="VA_ServingSchool" value="~([students]VA_ServingSchool)"/>
+					</tr>
+					
+					<tr class="~[evenoddrow]">
+						<td title="[Students]VA_Dropout_Reason"><span class="bold">W8 Reason Code</span>
+						<br>
+						(Dropout Reason)</td>
+						<td>
+						<select name="[students]VA_Dropout_Reason">
+							<option value=""></option>
+							<option value="10">Achievement (10)</option>
+							<option value="20">Behavioral (20)</option>
+							<option value="30">Health (30)</option>
+							<option value="40">Family reasons (40)</option>
+							<option value="41">Parental Privilege: Age/maturity (41)</option>
+							<option value="42">Non-applicable (PK Students only) (42)</option>
+							<option value="50">Financial hardship (50)</option>
+							<option value="60">Employment (60)</option>
+							<option value="70">Moved (70)</option>
+							<option value="80">Maximum age (80)</option>
+							<option value="81">Personal choice (81)</option>
+							<option value="82">Post Graduate (82)</option>
+							<option value="90">Expulsion (90)</option>
+						</select></td>
+					</tr>
+					
+					<tr class="~[evenoddrow]">
+						<td class="bold" title="[Students]VA_Retention">Retained</td>
+						<td><input type="checkbox" name="[students]va_retention" value="" /></td>
+					</tr>
+					
+					<tr class="~[evenoddrow]">
+						<td class="bold" title="[Students]VA_TuitionPaid">Tuition Paid Code</td>
+						<td>
+						<select name="[students]VA_TuitionPaid">
+							<option value=""></option>
+							<option value="02">Paid Tuition to State Supported Institution (02)</option>
+							<option value="03">Paid Tuition to Private Institution (03)</option>
+							<option value="04">Paid Tuition to Regional Center (04)</option>
+							<option value="05">Received Tuition from Another LEA (05)</option>
+							<option value="07">Served Through CSA (07)</option>
+							<option value="09">Inter-State Compact Placement (09)</option>
+							<option value="10">Tuition Received from Contiguous Out-of-State Stu. w/reciprocal att. priv. (10)</option>
+							<option value="11">Tuition Received from Contiguous Out-of-State Stu. w-o/reciprocal att. priv. (11)</option>
+							<option value="12">Tuition Received from a Non-Contiguous State or US Territory (12)</option>
+							<option value="15">Tuition paid to a school outside of Virginia (15)</option>
+							<option value="16">Tuition waived; student served through Public School Choice agreement (16)</option>
+							<option value="17">Tuition waived; applicable only to Fairfax/Falls Church DJJ/Community SVCS BD (17)</option>
+							<option value="18">Tuition waived for full time virutal program (18)</option>
+						</select></td>
+					</tr>
+					
+					<tr class="~[evenoddrow]">
+						<td class="bold" title="[Students]VA_np_fte">Non-public Student FTE</td>
+						<td>
+						<script type="text/javascript">
+							var npFTE=~([Students]VA_np_fte);
+							switch(npFTE){
+								case 10:
+									document.write('Student takes a course NOT approved for SOQ reimbursement (10)');
+									break;
+								case 25:
+									document.write('Student takes 1 course approved (25)');
+									break;
+								case 50:
+									document.write('Student takes 2 courses approved (50)');
+									break;
+								default:
+									document.write('');
+							}
+						</script></td>
+					</tr>
+					
+					<tr class="~[evenoddrow]">
+						<td class="bold" title="[Students]VA_SchoolChoiceStatusCD">School Choice Status Code</td>
+						<td>
+						<select name="[students]VA_SchoolChoiceStatusCD">
+							<option value=""></option>
+							<option value="1">Applied to transfer, BUT request not granted for School Choice (1)</option>
+							<option value="2">Applied to transfer, AND request was granted BUT did not transfer (2)</option>
+							<option value="3">Applied to transfer, AND transferred from Responsible to Serving School (3)</option>
+						</select></td>
+					</tr>
+					
+					<tr class="~[evenoddrow]">
+						<td class="bold" title="[Students]VA_FTVirtual_ProgCode">Full Time Virtual Program Code</td>
+						<td>
+						<select name="[students]VA_FTVirtual_ProgCode">
+							<option value=""></option>
+							<option value="1">Participates from home, not homebound, not homebased (1)</option>
+							<option value="2">Participates from home while on homebound education (2)</option>
+							<option value="3">Participates from home during a homebased expulsion or long-term suspension (3)</option>
+							<option value="4">Participates from home during a homebased short-term suspension (4)</option>
+							<option value="5">Participates from a public school facility (5)</option>
+							<option value="6">Participates from a private school facility (6)</option>
+							<option value="7">Participates from another location (7)</option>
+						</select></td>
+					</tr>
+					
+					<tr class="~[evenoddrow]">
+						<td class="bold" title="[Students]VA_MilCompStaFlag">Military Compact Flag (Underage student can attend Kindergarten in VA)</td>
+						<td><input type="checkbox" name="[Students]VA_MilCompStaFlag" value="" /></td>
+					</tr>
+					
+				</table>
+				</div>
+				
+				<h2 class="toggle collapsed">Demographics</h2>
+				<div>
+				<table border="0" cellspacing="0" cellpadding="4" width="100%">
+					<tr class="~[evenoddrow]">
+						<td class="bold">NCLB Ethnicity</td>
+						<td> These values can be edited at the <a href="/admin/students/generaldemographics.html">Demographics </a> page for this student.
+					</tr>
+					
+					<tr class="~[evenoddrow;maintain]">
+						<td class="subhead">~[text:psx.html.admin_students.generaldemographics.ethnicity]</td>
+						<td>
+						<div>
+							<label>~[text:psx.html.admin_students.generaldemographics.is_the_student_hispanic_or_latino]</label>
+							<input id="defaultEthnicity" type="hidden" name="[Students]FedEthnicity" value="-1">
+							~[Comment:Note that the onload javascript will revert this back to -1 after it's been changed to whatever is currently in the DB.]
+							<div class="choicefloat">
+								<input type="radio" name="[Students]FedEthnicity" value="1" disabled>
+								~[text:psx.html.admin_students.generaldemographics.yes]
+							</div>
+							<div class="choicefloat">
+								<input type="radio" name="[Students]FedEthnicity" value="0" disabled>
+								~[text:psx.html.admin_students.generaldemographics.no]
+							</div>
+							~[if.pref.FRE_AllowDeclineEthnicity=1]
+							<div class="choicefloat">
+								<span class="declined">
+									<input type="radio" name="[Students]FedEthnicity" value="2">
+									~[pref:FRE_DeclineEthnicityText]</span>
+							</div>
+							[/if]
+							<div class=clearit>
+								<!-- -->
+							</div>
+						</div></td>
+					</tr>
+					
+					<tr class="~[evenoddrow]">
+						<td class="subhead">~[text:psx.html.admin_students.generaldemographics.race]</td>
+						<td> ~[brij_renderform:federalrace;:GetStudentRaceSelectionBlock] </td>
+					</tr>
+					
+					<script src="/scripts/jquery-1.4.2.min.js"></script>
+					<script src="/scripts/jquery-ui-1.8.1.custom.min.js"></script>
+					<script type="text/javascript">
+						$(document).ready(function() {
+							updateVA_ERCode();
+							window.parent.frames[1].$("input[name='race']").attr('disabled', 'true');
+							window.parent.frames[1].$("span[class='clickable']").attr('disabled', 'true');
+							setHispanic(~([students]fedethnicity));
+						});
+						var raceStr = "";
+						function updateVA_ERCode() {
+							var numboxes = countStateBoxesChecked();
+							var erCodeValue = mapVA_ERCode(numboxes);
+							// also references and sets external variable raceStr
+							window.parent.frames[1].$('#VA_ERCode').val(erCodeValue);
+						}
+
+						function mapVA_ERCode(raceCount) {
+							var erCodeValue = "";
+							switch(raceCount) {
+								// if one box checked
+								case 1:
+									erCodeValue = raceStr;
+									break;
+								// if two boxes checked
+								case 2:
+									switch(raceStr) {
+										case "12":
+											erCodeValue = "07"
+											break;
+										case "13":
+											erCodeValue = "08"
+											break;
+										case "15":
+											erCodeValue = "09"
+											break;
+										case "16":
+											erCodeValue = "10"
+											break;
+										case "23":
+											erCodeValue = "11"
+											break;
+										case "25":
+											erCodeValue = "12"
+											break;
+										case "26":
+											erCodeValue = "13"
+											break;
+										case "35":
+											erCodeValue = "14"
+											break;
+										case "36":
+											erCodeValue = "15"
+											break;
+										case "56":
+											erCodeValue = "16"
+											break;
+										default:
+											erCodeValue = "";
+									}
+									break;
+								// if three boxes checked
+								case 3:
+									switch(raceStr) {
+										case "123":
+											erCodeValue = "17";
+											break;
+										case "125":
+											erCodeValue = "18";
+											break;
+										case "126":
+											erCodeValue = "19";
+											break;
+										case "235":
+											erCodeValue = "20";
+											break;
+										case "236":
+											erCodeValue = "21";
+											break;
+										case "356":
+											erCodeValue = "22";
+											break;
+										case "136":
+											erCodeValue = "23";
+											break;
+										case "135":
+											erCodeValue = "24";
+											break;
+										case "156":
+											erCodeValue = "25";
+											break;
+										case "256":
+											erCodeValue = "26";
+											break;
+										default:
+											erCodeValue = "";
+									}
+									break;
+								// if four boxes checked
+								case 4:
+									switch(raceStr) {
+										case "1235":
+											erCodeValue = "27";
+											break;
+										case "2356":
+											erCodeValue = "28";
+											break;
+										case "1356":
+											erCodeValue = "29";
+											break;
+										case "1256":
+											erCodeValue = "30";
+											break;
+										case "1236":
+											erCodeValue = "31";
+											break;
+										default:
+											erCodeValue = "";
+									}
+									break;
+								// if all five boxes checked
+								case 5:
+									erCodeValue = "32"
+									break;
+								default:
+									erCodeValue = "";
+							}
+							if (erCodeValue != "") {
+								//erCodeValue="00"+erCodeValue;
+								//erCodeValue=erCodeValue.substr(erCodeValue.length-(erCodeValue.length-2),2);
+								if (erCodeValue.length < 2)
+									erCodeValue = "0" + erCodeValue;
+							}
+							return erCodeValue;
+						}
+
+						function countStateBoxesChecked() {
+							var raceCount = 0;
+							var race12checked = window.parent.frames[1].$('#race_I').attr('checked');
+							var race13checked = window.parent.frames[1].$('#race_A').attr('checked');
+							var race14checked = window.parent.frames[1].$('#race_B').attr('checked');
+							var race15checked = window.parent.frames[1].$('#race_W').attr('checked');
+							var race16checked = window.parent.frames[1].$('#race_P').attr('checked');
+							raceStr = "";
+							if (race12checked) {
+								raceCount++;
+								raceStr = raceStr + "1";
+							}
+							if (race13checked) {
+								raceCount++;
+								raceStr = raceStr + "2";
+							}
+							if (race14checked) {
+								raceCount++;
+								raceStr = raceStr + "3";
+							}
+							if (race15checked) {
+								raceCount++;
+								raceStr = raceStr + "5";
+							}
+							if (race16checked) {
+								raceCount++;
+								raceStr = raceStr + "6";
+							}
+							return raceCount;
+						}
+					</script>
+					
+					<tr class="~[evenoddrow]">
+						<td class="bold">VA State Ethnicity/Race Code</td>
+						<td >
+						<input type="text" name="VA_ERCode" id="VA_ERCode" size="10" readonly='true' />
+						</td>
+					</tr>
+					
+					<tr class="~[evenoddrow]">
+						<td class="bold" title="[Students]VA_Primary_Dis_Code">Primary Disability</td>
+						<td>
+						<select name="[students]VA_Primary_Dis_Code" id="VA_Primary_Dis_Code">
+							<option value=""></option>
+							<option value="1">(MR) Mental retardation (1)</option>
+							<option value="2">(SD) Severe disability (2)</option>
+							<option value="3">(MD) Multiple disabilities (3)</option>
+							<option value="4">(OI) Orthopedic impairment (4)</option>
+							<option value="5">(VI) Visual impairment (5)</option>
+							<option value="6">(HI) Hearing impairment (6)</option>
+							<option value="7">(SLD) Specific learning disability (7)</option>
+							<option value="8">(ED) Emotional disability (8)</option>
+							<option value="9">(SLI) Speech or language impairment (9)</option>
+							<option value="10">(OHI) Other health impairment (10)</option>
+							<option value="12">(DB) Deaf-blindness (12)</option>
+							<option value="13">(AUT) Autism (13)</option>
+							<option value="14">(TBI) Traumatic brain injury (14)</option>
+							<option value="15">(504) Qualified individual with disabilities under Section 504 of the Rehabilitation Act (15)</option>
+							<option value="16">(DD) Developmental delay (16)</option>
+							<option value="19">(ID) Intellectual Disabilities (19)</option>
+						</select></td>
+					</tr>
+					
+					<tr class="~[evenoddrow]">
+						<td class="bold" title="[Students]VA_Sp_Ed_Per">Special Education Weekly Time Percentage</td>
+						<td>
+						<input type="text" name="[students]VA_Sp_Ed_Per" value="" maxlength="3" size="4">
+						%</td>
+					</tr>
+					
+					~[if.~(studentscreenaccess;lunch.html)=1]
+					<tr class="~[evenoddrow]">
+						<td class="bold" title="[Students]VA_Disadvantaged">Disadvantaged</td>
+						<td>
+						<input type="checkbox" name="[students]va_disadvantaged" value="" />
+						</td>
+					</tr>
+					[/if]
+					
+					<tr class="~[evenoddrow]">
+						<td class="bold" title="[Students]VA_BirthCountry" >Birth Country Code</td>
+						<td>
+						<input type="text" name="[students]VA_BirthCountry" value="" maxlength="4" size="4" id="VA_BirthCountry">
+						(<a href="usa_va/VA_Country.html?field=VA_BirthCountry" target="_blank">Codes</a>)</td>
+					</tr>
+					
+					<tr class="~[evenoddrow]">
+						<td class="bold" title="[Students]VA_HomeLang">Home Language Code</td>
+						<td>
+						<input type="text" name="[students]VA_HomeLang" value="" maxlength="4" size="4" id="VA_HomeLang">
+						(<a href="usa_va/VA_Lang.html?field=VA_HomeLang" target="_blank">Codes</a>)</td>
+					</tr>
+					
+					<tr class="~[evenoddrow]">
+						<td class="bold" title="[Students]VA_Immigrant">Immigrant</td>
+						<td><input type="checkbox" name="[students]va_immigrant" value="" /></td>
+					</tr>
+					
+					<tr class="~[evenoddrow]">
+						<td class="bold" title="[Students]VA_PrimNight_ResCode">Inital Primary Nighttime Residence Code</td>
+						<td>
+						<select name="[students]VA_PrimNight_ResCode" id="VA_PrimNight_ResCode" onBlur="javascript:setDisadvantagedField();">
+							<option value=""></option>
+							<option value="1">Unsheltered (1)</option>
+							<option value="2">Shelters (2)</option>
+							<option value="3">Doubled-Up (3)</option>
+							<option value="4">Hotel/Motel (4)</option>
+						</select></td>
+					</tr>
+					
+					<tr class="~[evenoddrow]">
+						<td class="bold" title="[Students]VA_NegDelinquent_Code">Neglected/Delinquent Code</td>
+						<td>
+						<select name="[students]VA_NegDelinquent_Code">
+							<option value=""></option>
+							<option value="1">Neglected Programs (1)</option>
+							<option value="2">Juvenile Detention (2)</option>
+							<option value="3">Juvenile Correction (3)</option>
+							<option value="4">Adult Correction (4)</option>
+							<option value="5">At Risk (5)</option>
+							<option value="6">Other (6)</option>
+						</select></td>
+					</tr>
+					
+					<tr class="~[evenoddrow]">
+						<td class="bold" title="[Students]VA_Unacc_Hless_Youth_Flag">Unaccompanied Homeless Youth Flag</td>
+						<td><input type="checkbox" name="[students]va_unacc_hless_youth_flag" value="" /></td>
+					</tr>
+					
+				</table>
+				</div>
+					
+				<h2 class="toggle collapsed">Academics</h2>
+				<div>
+				<table border="0" cellspacing="0" cellpadding="4" width="100%">
+					<tr class="~[evenoddrow]">
+						<td class="bold" title="[Students]VA_Gifted_Code">Gifted Code</td>
+						<td>
+						<select name="[students]VA_Gifted_Code">
+							<option value=""></option>
+							<option value="1">Gen. Intellectual Aptitude only (1)</option>
+							<option value="2">Spec. Academic Aptitude only (2)</option>
+							<option value="3">Visual/Performing Arts only (3)</option>
+							<option value="4">Tech/Prac Arts only (4)</option>
+							<option value="12">Gen. Intellectual Aptitude & Spec. Academic Aptitude (12)</option>
+							<option value="13">Gen. Intellectual Aptitude & Visual/Performing Arts (13)</option>
+							<option value="14">Gen. Intellectual Aptitude & Tech/Prac Arts (14)</option>
+							<option value="23">Spec. Academic Aptitude & Visual/Performing Arts (23)</option>
+							<option value="24">Spec. Academic Aptitude & Tech/Prac Arts (24)</option>
+							<option value="34">Visual/Performing Arts & Tech/Prac Arts (34)</option>
+							<option value="123">Gen. Intellectual, Spec. Academic Aptitude, & Visual/Performing Arts (123)</option>
+							<option value="124">Gen. Intellectual, Spec. Academic Aptitude, & Tech/Prac Arts (124)</option>
+							<option value="234">Spec. Academic Aptitude, Visual/Performing Arts, & Tech/Prac Arts (234)</option>
+							<option value="1234">Gen. Intellectual, Spec. Academic, Visual/Performing & Tech/Prac Arts (1234)</option>
+						</select></td>
+					</tr>
+					
+					<tr class="~[evenoddrow]">
+						<td class="bold" title="[Students]VA_GiftedReferralFlag">Gifted Referral </td>
+						<td><input type="checkbox" name="[students]va_giftedReferralFlag" value=:"" /></td>
+					</tr>
+					
+					<tr class="~[evenoddrow]">
+						<td class="bold" title="[Students]VA_KindergartenReadiness">Kindergarten Readiness Assessment Flag</td>
+						<td><input type="checkbox" name="[students]va_kindergartenreadiness" value="" /></td>
+					</tr>
+					
+					<tr class="~[evenoddrow]">
+						<td class="bold" title="[Students]VA_Title1_Code">Title 1 Code</td>
+						<td>
+						<select name="[students]VA_Title1_Code">
+							<option value=""></option>
+							<option value="01">Reading (01)</option>
+							<option value="02">Math (02)</option>
+							<option value="03">Reading and Math (03)</option>
+							<option value="04">Math and Health (04)</option>
+							<option value="05">Reading and Health (05)</option>
+							<option value="06">Math, Reading and Health (06)</option>
+							<option value="07">Math and Support Services (07)</option>
+							<option value="08">Reading and Support Services (08)</option>
+							<option value="09">Math, Reading and Support Services (09)</option>
+							<option value="10">Math, Reading, Support Services and Health (10)</option>
+						</select></td>
+					</tr>
+					
+					<tr class="~[evenoddrow]">
+						<td class="bold" title="[Students]VA_GED_Code">GED Program Code</td>
+						<td>
+						<select name="[students]VA_GED_Code">
+							<option value=""></option>
+							<option value="1">GED (1)</option>
+							<option value="2">ISAEP (2)</option>
+							<option value="3">GAD (3)</option>
+						</select></td>
+					</tr>
+					
+					<tr class="~[evenoddrow]">
+						<td class="bold" title="[Students]VA_Bacc">International Baccalaureate Program</td>
+						<td><input type="checkbox" name="[students]va_bacc" value="" /></td>
+					</tr>
+					
+					<tr class="~[evenoddrow]">
+						<td class="bold" title="[Students]VA_Grd_Comp_Code">Graduate/Other Completer Code</td>
+						<td>
+						<select name="[students]VA_Grd_Comp_Code">
+							<option value=""></option>
+							<option value="1">Standard Diploma (1)</option>
+							<option value="2">Advanced Studies Diploma (2)</option>
+							<option value="3">Special Diploma (3)</option>
+							<option value="4">Certificate of Program Completion (4)</option>
+							<option value="5">General Educational Development (GED) (5)</option>
+							<option value="6">International Baccalaureate (IB) Diploma (6)</option>
+							<option value="7">Modified Standard Diploma (7)</option>
+							<option value="8">GED Certificate as a part of an ISAEP (8)</option>
+							<option value="9">General Achievement Diploma (9)</option>
+							<option value="10">No award in this school year - IEP allows multiple years in grade 12(10)</option>
+							<option value="11">No award in this school year - foreign exchange student (11)</option>
+							<option value="12">No award in this school year - student whose age and LEP status allows for multiple years in grade 12(12)</option>
+							<option value="13">No award in this school year - previously earned a Graduate/Other Completer Code 1-9 in a prior school year(13)</option>
+							<option value="14">Standard Technical Diploma  - Diploma awarded to a student who has earned the units of credit prescribed by the BoE(14)</option>
+							<option value="15">Advanced Technical Diploma  - Diploma awarded to a student who has earned the units of credit prescribed by the BoE(15)</option>
+						</select></td>
+					</tr>
+					
+					<tr class="~[evenoddrow]">
+						<td class="bold" title="[students]va_diploma_seal">Diploma Seals</td>
+						<td>
+							<input type="checkbox" id="diplomaSealGovernorsSeal" /><label for="diplomaSealGovernorsSeal">Governor's Seal</label><br />
+							<input type="checkbox" id="diplomaSealBoardOfEducationSeal" /><label for="diplomaSealBoardOfEducationSeal">Board of Education Seal</label><br />
+							<input type="checkbox" id="diplomaSealBoardOfEducationCareerAndTechnicalEducationSeal" /><label for="diplomaSealBoardOfEducationCareerAndTechnicalEducationSeal">Board of Education Career and Technical Education Seal</label><br />
+							<input type="checkbox" id="diplomaSealBoardOfEducationAdvancedMathematicsAndTechnology" /><label for="diplomaSealBoardOfEducationAdvancedMathematicsAndTechnology">Board of Education Advanced Mathematics and Technology</label><br />
+							<input type="checkbox" id="diplomaSealBoardOfEducationSealForExcellenceInCivicsEducation" /><label for="diplomaSealBoardOfEducationSealForExcellenceInCivicsEducation">Board of Education Seal for Excellence in Civics Education</label><br />
+							<label for="va_diploma_seal">State Code:</label>&nbsp;<input type="text" name="[students]va_diploma_seal" value="" id="vaDiplomaSeal" readonly="true" />
+						</td>
+					</tr>
+					
+					<script type="text/javascript">
+						$j(document).ready(function() {
+							var stateCodeId = "#vaDiplomaSeal";
+							if ($j(stateCodeId).val()) {
+								var stateCode = $j(stateCodeId).val();
+								$j.each(stateCode, function(index, value) {
+									if (value === "1") $j('#diplomaSealGovernorsSeal').prop("checked", "true");
+									if (value === "2") $j('#diplomaSealBoardOfEducatioNSeal').prop("checked", "true");
+									if (value === "3") $j('#diplomaSealBoardOfEducationCareerAndTechnicalEducationSeal').prop("checked", "true");
+									if (value === "4") $j('#diplomaSealBoardOfEducationAdvancedMathematicsAndTechnology').prop("checked", "true");
+									if (value === "5") $j('#diplomaSealBoardOfEducationSealForExcellenceInCivicsEducation').prop("checked", "true");
+								});
+							}
+						});
+						
+						$j("input[id^='diplomaSeal']").click(function() {
+							var str = "";
+							$j("input[id^='diplomaSeal']").each(function() {
+								if ($j(this).is(':checked')) {
+									if (this.id === "diplomaSealGovernorsSeal") str = "1"; 
+									if (this.id === "diplomaSealBoardOfEducationSeal") str = str + "2";
+									if (this.id === "diplomaSealBoardOfEducationCareerAndTechnicalEducationSeal") str = str + "3";
+									if (this.id === "diplomaSealBoardOfEducationAdvancedMathematicsAndTechnology") str = str + "4";
+									if (this.id === "diplomaSealBoardOfEducationSealForExcellenceInCivicsEducation") str = str + "5";
+								}
+							});
+							$j('#vaDiplomaSeal').val(str);
+						});
+					</script>
+					
+					<tr class="~[evenoddrow]">
+						<td class="bold" title="[Students]VA_EarlyCollegeScholarProgCD">Early College Scholar Program Code</td>
+						<td>
+						<select name="[students]VA_EarlyCollegeScholarProgCD">
+							<option value=""></option>
+							<option value="1">Student completed Early College Scholar Progam agreement (1)</option>
+							<option value="2">Student earned Governor's Early College Scholar certificate (2)</option>
+							<option value="3">Commonwealth Scholar Program (3)</option>
+							<option value="4">Early College and Commonwealth Scholar Certificate (4)</option>
+							<option value="5">Participating in Early College Scholar &amp; Commonwealth Scholar Programs (5)</option>
+						</select></td>
+					</tr>
+					
+					<tr class="~[evenoddrow]">
+						<td class="bold" title="[Students]VA_Grd_Plan_Code">Graduation Plan Code</td>
+						<td>
+						<select name="[students]VA_Grd_Plan_Code">
+							<option value=""></option>
+							<option value="1">4-yr college (1)</option>
+							<option value="2">2-yr college (2)</option>
+							<option value="3">Other education plans (3)</option>
+							<option value="4">Military (4)</option>
+							<option value="5">Employment (5)</option>
+							<option value="6">None (6)</option>
+						</select></td>
+					</tr>
+					
+					<tr class="~[evenoddrow]">
+						<td class="bold" title="[Students]VA_Adv_Place_Code">Advanced Placement Code</td>
+						<td>
+						<select name="[students]VA_Adv_Place_Code">
+							<option value=""></option>
+							<option value="1">Enrolled in AP class (1)</option>
+							<option value="2">Enrolled in AP and took AP exam (2)</option>
+							<option value="3">Took AP exam (3)</option>
+						</select></td>
+					</tr>
+					
+					<tr class="~[evenoddrow]">
+						<td class="bold" title="[Students]VA_Dual">Dual Enrollment</td>
+						<td><input type="checkbox" name="[students]va_dual" value="" /></td>
+					</tr><!-- Start insert misc. -->
+
+					<tr class="~[evenoddrow]">
+						<td class="bold" title="[Students]VA_Truancy_Conf">Truancy Conference</td>
+						<td><input type="checkbox" name="[va_students]va_truancy_conf" value="" /></td>
+					</tr>
+					
+					<tr class="~[evenoddrow]">
+						<td class="bold" title="[Students]VA_DistanceLearning">Distance Learning Flag (Retiring in 2013-2014)</td>
+						<td><input type="checkbox" name="[students]va_distanceLearning" value="" /></td>
+					</tr>
+					
+					<tr class="~[evenoddrow]">
+						<td class="bold" title="[Students]VA_PK_experience_code">PK Experience Code</td>
+						<td>
+						<select name="[students]VA_PK_experience_code">
+							<option value=""></option>
+							<option value="20">Coordinated Pre-kindergarten Classroom (20)</option>
+							<option value="21">Virginia Preschool Initiative (VPI) (21)</option>
+							<option value="22">Title I Pre-kindergarten (22)</option>
+							<option value="23">Head Start  (23)</option>
+							<option value="30">Coordinated Special Education (30)</option>
+							<option value="31">Special Education Only (31)</option>
+							<option value="40">Government - Tuition Charged (40)</option>
+							<option value="50">Private Provider (50)</option>
+							<option value="51">Licensed Family Home Daycare Provider (51)</option>
+							<option value="60">No Formal or Institutional PK Program (60)</option>
+							<option value="61">Other (61)</option>
+							<option value="99">Not Provided (99)</option>
+						</select></td>
+					</tr>
+					
+					<tr class="~[evenoddrow]">
+						<td class="bold" title="[Students]VA_PK_weekly_time">PK Weekly Time Code</td>
+						<td>
+						<select name="[students]VA_PK_weekly_time">
+							<option value=""></option>
+							<option value="0">No time in a formal or institutional PK program (0)</option>
+							<option value="1">Less than 15 hours per week (1)</option>
+							<option value="15">15 hours or more but less than 30 hours per week (15)</option>
+							<option value="30">30 or more hours per week (30)</option>
+						</select></td>
+					</tr>
+					
+					<tr class="~[evenoddrow]">
+						<td class="bold" title="[Students]VA_LEP_Serv_Cd">Receiving ESL Services Code</td>
+						<td>
+						<select name="[students]VA_LEP_Serv_Cd">
+							<option value=""></option>
+							<option value="1">Identified as LEP and receives ESL Services (1)</option>
+							<option value="2">Identified as LEP but does not receive or has refused ESL Services (2)</option>
+							<option value="3">Identified as formerly LEP for each of the two years after exiting ESL services (3)</option>
+						</select></td>
+					</tr>
+					
+					<tr class="~[evenoddrow]">
+						<td class="bold" title="[Students]VA_IB_Cd">IB Code</td>
+						<td>
+						<select name="[students]VA_IB_Cd">
+							<option value=""></option>
+							<option value="1">Enrolled in IB class (1)</option>
+							<option value="2">Enrolled in IB class and took IB exam (2)</option>
+							<option value="3">Took IB exam (3)</option>
+						</select></td>
+					</tr>
+
+				</table>
+				</div>
+					~[x:insertfile;usa_va/stateVA2.html] <!-- End insert misc. -->
+					<!-- Start insert custom. -->
+				<h2>Waynesboro Custom Fields</h2>
+					~[x:insertfile;stateVA-VASIS.html] <!-- End insert custom. -->
+				<div class="button-row">
+					<input type="hidden" name="ac" value="prim">
+					~[submitbutton]
+				</div>
+			</div>
+			<!-- end of content of bounding box -->
+			~[wc:admin_footer_frame_css]
+		</form>
+		
+		<script type="text/javascript">
+			// PSSR-10104 : For School Serving Code 9997 (Regional Jail & Detention Students), the student information
+			// needs to contain a primary diability code. For other school serving codes, there is no restriction
+			jQuery("form").submit(function() {
+				var serving_school = jQuery("#VA_ServingSchool").val();
+				var disability_code = jQuery("#VA_Primary_Dis_Code").val();
+				if (serving_school == 9997) {
+					if (disability_code != '')
+						return true;
+					else {
+						alert('Primary Disability cannot be empty for Serving School 9997');
+						return false;
+					}
+				}
+			});
+			//Automatically update the va_homeless field if the primary nighttime residence code changes.
+			$j('#VA_PrimNight_ResCode').change(function() {
+				var code = $j('#VA_PrimNight_ResCode option:selected').val();
+				if (code) {
+					$j('#VA_homeless').prop('checked', true);
+					$j('#VA_homeless').prop('value', 1);
+				} else {
+					$j('#VA_homeless').prop('checked', false);
+					$j('#VA_homeless').prop('value', '');
+				}
+			});
+		</script>
+	</body>
+</html>
+<!-- end right frame -->
