@@ -3,6 +3,7 @@
 	<name>va_enhanced_student_pages</name>
 	<comment></comment>
 	<projects>
+		<project>ps_html5_semantics</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>
