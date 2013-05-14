@@ -10,18 +10,11 @@
 		<script src="/scripts/jquery-1.4.2.min.js"></script>
 		<script src="/scripts/jquery-ui-1.8.1.custom.min.js"></script>
 		
-		<script type="text/javascript">
-			function setDisadvantagedField() {
-				var dis = document.getElementById('VA_Disadvantaged');
-				var disadvantaged = dis.options[dis.selectedIndex].value;
-				var primnight = jQuery("#VA_PrimNight_ResCode").val();
-				if ((primnight != "") && (disadvantaged == "")) {
-					alert("Disdvantaged field is automatically set when Nighttime Residence Code is entered.");
-					dis.options[1].selected = true;
-				}
+		<style type="text/css">
+			td.bold {
+				width: 20%;
 			}
-		</script>
-		
+		</style>
 	</head>
 	
 	<body data-validation="exclude"  data-validation="exclude" >
@@ -142,19 +135,21 @@
 						<td class="bold" title="[Students]VA_np_fte">Non-public Student FTE</td>
 						<td>
 						<script type="text/javascript">
-							var npFTE=~([Students]VA_np_fte);
-							switch(npFTE){
-								case 10:
-									document.write('Student takes a course NOT approved for SOQ reimbursement (10)');
-									break;
-								case 25:
-									document.write('Student takes 1 course approved (25)');
-									break;
-								case 50:
-									document.write('Student takes 2 courses approved (50)');
-									break;
-								default:
-									document.write('');
+							var npFTE = "~([students]va_np_fte)";
+							if (npFTE) {
+								switch(npFTE){
+									case "10":
+										document.write('Student takes a course NOT approved for SOQ reimbursement (10)');
+										break;
+									case "25":
+										document.write('Student takes 1 course approved (25)');
+										break;
+									case "50":
+										document.write('Student takes 2 courses approved (50)');
+										break;
+									default:
+										document.write('');
+								}
 							}
 						</script></td>
 					</tr>
@@ -409,42 +404,11 @@
 						</td>
 					</tr>
 					
-					<tr class="~[evenoddrow]">
-						<td class="bold" title="[Students]VA_Primary_Dis_Code">Primary Disability</td>
-						<td>
-						<select name="[students]VA_Primary_Dis_Code" id="VA_Primary_Dis_Code">
-							<option value=""></option>
-							<option value="1">(MR) Mental retardation (1)</option>
-							<option value="2">(SD) Severe disability (2)</option>
-							<option value="3">(MD) Multiple disabilities (3)</option>
-							<option value="4">(OI) Orthopedic impairment (4)</option>
-							<option value="5">(VI) Visual impairment (5)</option>
-							<option value="6">(HI) Hearing impairment (6)</option>
-							<option value="7">(SLD) Specific learning disability (7)</option>
-							<option value="8">(ED) Emotional disability (8)</option>
-							<option value="9">(SLI) Speech or language impairment (9)</option>
-							<option value="10">(OHI) Other health impairment (10)</option>
-							<option value="12">(DB) Deaf-blindness (12)</option>
-							<option value="13">(AUT) Autism (13)</option>
-							<option value="14">(TBI) Traumatic brain injury (14)</option>
-							<option value="15">(504) Qualified individual with disabilities under Section 504 of the Rehabilitation Act (15)</option>
-							<option value="16">(DD) Developmental delay (16)</option>
-							<option value="19">(ID) Intellectual Disabilities (19)</option>
-						</select></td>
-					</tr>
-					
-					<tr class="~[evenoddrow]">
-						<td class="bold" title="[Students]VA_Sp_Ed_Per">Special Education Weekly Time Percentage</td>
-						<td>
-						<input type="text" name="[students]VA_Sp_Ed_Per" value="" maxlength="3" size="4">
-						%</td>
-					</tr>
-					
 					~[if.~(studentscreenaccess;lunch.html)=1]
 					<tr class="~[evenoddrow]">
 						<td class="bold" title="[Students]VA_Disadvantaged">Disadvantaged</td>
 						<td>
-						<input type="checkbox" name="[students]va_disadvantaged" value="" />
+						<input type="checkbox" name="[students]va_disadvantaged" value="" id="VA_Disadvantaged" />
 						</td>
 					</tr>
 					[/if]
@@ -471,7 +435,7 @@
 					<tr class="~[evenoddrow]">
 						<td class="bold" title="[Students]VA_PrimNight_ResCode">Inital Primary Nighttime Residence Code</td>
 						<td>
-						<select name="[students]VA_PrimNight_ResCode" id="VA_PrimNight_ResCode" onBlur="javascript:setDisadvantagedField();">
+						<select name="[students]VA_PrimNight_ResCode" id="VA_PrimNight_ResCode">
 							<option value=""></option>
 							<option value="1">Unsheltered (1)</option>
 							<option value="2">Shelters (2)</option>
@@ -530,6 +494,37 @@
 					<tr class="~[evenoddrow]">
 						<td class="bold" title="[Students]VA_GiftedReferralFlag">Gifted Referral </td>
 						<td><input type="checkbox" name="[students]va_giftedReferralFlag" value=:"" /></td>
+					</tr>
+					
+					<tr class="~[evenoddrow]">
+						<td class="bold" title="[Students]VA_Primary_Dis_Code">Primary Disability</td>
+						<td>
+						<select name="[students]VA_Primary_Dis_Code" id="VA_Primary_Dis_Code">
+							<option value=""></option>
+							<option value="1">(MR) Mental retardation (1)</option>
+							<option value="2">(SD) Severe disability (2)</option>
+							<option value="3">(MD) Multiple disabilities (3)</option>
+							<option value="4">(OI) Orthopedic impairment (4)</option>
+							<option value="5">(VI) Visual impairment (5)</option>
+							<option value="6">(HI) Hearing impairment (6)</option>
+							<option value="7">(SLD) Specific learning disability (7)</option>
+							<option value="8">(ED) Emotional disability (8)</option>
+							<option value="9">(SLI) Speech or language impairment (9)</option>
+							<option value="10">(OHI) Other health impairment (10)</option>
+							<option value="12">(DB) Deaf-blindness (12)</option>
+							<option value="13">(AUT) Autism (13)</option>
+							<option value="14">(TBI) Traumatic brain injury (14)</option>
+							<option value="15">(504) Qualified individual with disabilities under Section 504 of the Rehabilitation Act (15)</option>
+							<option value="16">(DD) Developmental delay (16)</option>
+							<option value="19">(ID) Intellectual Disabilities (19)</option>
+						</select></td>
+					</tr>
+					
+					<tr class="~[evenoddrow]">
+						<td class="bold" title="[Students]VA_Sp_Ed_Per">Special Education Weekly Time Percentage</td>
+						<td>
+						<input type="text" name="[students]VA_Sp_Ed_Per" value="" maxlength="3" size="4">
+						%</td>
 					</tr>
 					
 					<tr class="~[evenoddrow]">
@@ -605,37 +600,7 @@
 							<label for="va_diploma_seal">State Code:</label>&nbsp;<input type="text" name="[students]va_diploma_seal" value="" id="vaDiplomaSeal" readonly="true" />
 						</td>
 					</tr>
-					
-					<script type="text/javascript">
-						$j(document).ready(function() {
-							var stateCodeId = "#vaDiplomaSeal";
-							if ($j(stateCodeId).val()) {
-								var stateCode = $j(stateCodeId).val();
-								$j.each(stateCode, function(index, value) {
-									if (value === "1") $j('#diplomaSealGovernorsSeal').prop("checked", "true");
-									if (value === "2") $j('#diplomaSealBoardOfEducatioNSeal').prop("checked", "true");
-									if (value === "3") $j('#diplomaSealBoardOfEducationCareerAndTechnicalEducationSeal').prop("checked", "true");
-									if (value === "4") $j('#diplomaSealBoardOfEducationAdvancedMathematicsAndTechnology').prop("checked", "true");
-									if (value === "5") $j('#diplomaSealBoardOfEducationSealForExcellenceInCivicsEducation').prop("checked", "true");
-								});
-							}
-						});
-						
-						$j("input[id^='diplomaSeal']").click(function() {
-							var str = "";
-							$j("input[id^='diplomaSeal']").each(function() {
-								if ($j(this).is(':checked')) {
-									if (this.id === "diplomaSealGovernorsSeal") str = "1"; 
-									if (this.id === "diplomaSealBoardOfEducationSeal") str = str + "2";
-									if (this.id === "diplomaSealBoardOfEducationCareerAndTechnicalEducationSeal") str = str + "3";
-									if (this.id === "diplomaSealBoardOfEducationAdvancedMathematicsAndTechnology") str = str + "4";
-									if (this.id === "diplomaSealBoardOfEducationSealForExcellenceInCivicsEducation") str = str + "5";
-								}
-							});
-							$j('#vaDiplomaSeal').val(str);
-						});
-					</script>
-					
+
 					<tr class="~[evenoddrow]">
 						<td class="bold" title="[Students]VA_EarlyCollegeScholarProgCD">Early College Scholar Program Code</td>
 						<td>
@@ -750,6 +715,7 @@
 				<h2>Waynesboro Custom Fields</h2>
 					~[x:insertfile;stateVA-VASIS.html] <!-- End insert custom. -->
 				<div class="button-row">
+					<input type="hidden" name="[students]va_homeless" id="VA_homeless" value="" />
 					<input type="hidden" name="ac" value="prim">
 					~[submitbutton]
 				</div>
@@ -779,10 +745,40 @@
 				if (code) {
 					$j('#VA_homeless').prop('checked', true);
 					$j('#VA_homeless').prop('value', 1);
+					$j('#VA_Disadvantaged').prop('checked', 'true');
 				} else {
 					$j('#VA_homeless').prop('checked', false);
 					$j('#VA_homeless').prop('value', '');
 				}
+				
+			});
+			
+			$j(document).ready(function() {
+				var stateCodeId = "#vaDiplomaSeal";
+				if ($j(stateCodeId).val()) {
+					var stateCode = $j(stateCodeId).val();
+					$j.each(stateCode, function(index, value) {
+						if (value === "1") $j('#diplomaSealGovernorsSeal').prop("checked", "true");
+						if (value === "2") $j('#diplomaSealBoardOfEducatioNSeal').prop("checked", "true");
+						if (value === "3") $j('#diplomaSealBoardOfEducationCareerAndTechnicalEducationSeal').prop("checked", "true");
+						if (value === "4") $j('#diplomaSealBoardOfEducationAdvancedMathematicsAndTechnology').prop("checked", "true");
+						if (value === "5") $j('#diplomaSealBoardOfEducationSealForExcellenceInCivicsEducation').prop("checked", "true");
+					});
+				}
+			});
+			
+			$j("input[id^='diplomaSeal']").click(function() {
+				var str = "";
+				$j("input[id^='diplomaSeal']").each(function() {
+					if ($j(this).is(':checked')) {
+						if (this.id === "diplomaSealGovernorsSeal") str = "1"; 
+						if (this.id === "diplomaSealBoardOfEducationSeal") str = str + "2";
+						if (this.id === "diplomaSealBoardOfEducationCareerAndTechnicalEducationSeal") str = str + "3";
+						if (this.id === "diplomaSealBoardOfEducationAdvancedMathematicsAndTechnology") str = str + "4";
+						if (this.id === "diplomaSealBoardOfEducationSealForExcellenceInCivicsEducation") str = str + "5";
+					}
+				});
+				$j('#vaDiplomaSeal').val(str);
 			});
 		</script>
 	</body>
